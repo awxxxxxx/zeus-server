@@ -31,6 +31,10 @@ exports.get_backend = (query) => {
   return Backend.findOne(query).exec();
 }
 
+exports.delete_backends = (query) => {
+  return Backend.remove(query);
+}
+
 /**
  * [description]
  * @param  {[type]} query [description]

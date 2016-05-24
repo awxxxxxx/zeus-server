@@ -10,6 +10,8 @@ app.use(function *(next) {
   const start = new Date;
   yield next;
   this.set('Access-Control-Allow-Origin', '*');
+  this.set('Access-Control-Allow-Headers','Content-Type');
+  this.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,POST,DELETE');
   const ms = new Date - start;
   console.log('%s %s - %s', this.method, this.url, ms);
 });
@@ -32,7 +34,8 @@ router.get('/zeus/accounts', Account.get_accounts)
  */
 router.get('/zeus/backends', Backend.get_backends)
   .post('/zeus/backends', Backend.add_backend)
-  .put('/zeus/backends/:id', Backend.update_backend);
+  .put('/zeus/backends/:id', Backend.update_backend)
+  .delete('/zeus/backends/:id', Backend.delete_backends);
 
 // 使用路由，启动服务
 app.use(router.routes())

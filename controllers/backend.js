@@ -61,4 +61,23 @@ exports.update_backend = function *(next) {
       msg: 'error'
     }
   }
+};
+
+exports.delete_backends = function *() {
+  try {
+    let query = {
+      _id: this.params.id
+    }
+    let result = yield Backend.delete_backends(query);
+    this.body = {
+      data: result,
+      msg: 'success'
+    }
+  } catch (e) {
+    this.status = 500;
+    this.body = {
+      error: e,
+      msg: 'error'
+    }
+  }
 }
