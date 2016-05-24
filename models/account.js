@@ -1,5 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
+const md5 = require('../utils/').md5;
 const Schema = mongoose.Schema;
 const account = new Schema({
   name: {
@@ -9,7 +10,8 @@ const account = new Schema({
     type: Number
   },
   password: {
-    type: String
+    type: String,
+    default: md5('123456')
   },
   sex: {
     type: String
