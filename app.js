@@ -3,8 +3,13 @@ const koa = require('koa');
 const path = require('path');
 const router = require('koa-router')();
 const app = koa();
+const session = require('koa-session');
 const Account = require('./controllers/account.js');
 const Backend = require('./controllers/backend.js');
+const Access = require('./controllers/access.js');
+
+app.keys = ['niufgaigafdsiufsal;lgh'];
+app.use(session(app));
 
 app.use(function *(next) {
   const start = new Date;
@@ -36,6 +41,11 @@ router.get('/zeus/backends', Backend.get_backends)
   .post('/zeus/backends', Backend.add_backend)
   .put('/zeus/backends/:id', Backend.update_backend)
   .delete('/zeus/backends/:id', Backend.delete_backends);
+
+router.get('/zeus/access', Access.get_access)
+  .post('/zeus/access', Access.add_access)
+  .delete('/zeus/access/:id', Access.delete_access);
+
 
 // 使用路由，启动服务
 app.use(router.routes())

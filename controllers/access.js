@@ -8,7 +8,7 @@ const parse = require('co-body');
  * @param  {Function} next [description]
  * @return {[type]}        [description]
  */
-exports.get_accesss = function *(next) {
+exports.get_access = function *(next) {
   let accesss = yield Access.get_accesss({});
   this.body = {
     data: accesss,
@@ -24,6 +24,8 @@ exports.get_accesss = function *(next) {
 exports.add_access = function *(next) {
   try {
     let post_data = yield parse(this);
+    let data = yield Access.get_one(post_data);
+    console.log(data);
     let result = yield Access.add_access(post_data);
     this.body = {
       data: result,

@@ -22,6 +22,10 @@ exports.get_access = (query) => {
   return Access.find(query).exec();
 }
 
+exports.get_one = (query) => {
+  return Access.findOne(query).exec();
+}
+
 exports.delete_access = (query) => {
   return Acces.remove(query);
 }
