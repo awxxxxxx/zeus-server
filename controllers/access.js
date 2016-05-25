@@ -9,9 +9,14 @@ const parse = require('co-body');
  * @return {[type]}        [description]
  */
 exports.get_access = function *(next) {
-  let accesss = yield Access.get_accesss({});
+  let account = this.session.user.id;
+  let access = yield Access.get_access({account: account});
+  access.forEach((item) => {
+    item._doc.name = item.backend.name || '';
+    item._doc.path = item.backend.path || '';
+  });
   this.body = {
-    data: accesss,
+    data: access,
     msg:'success'
   }
 };
@@ -25,7 +30,6 @@ exports.add_access = function *(next) {
   try {
     let post_data = yield parse(this);
     let data = yield Access.get_one(post_data);
-    console.log(data);
     let result = yield Access.add_access(post_data);
     this.body = {
       data: result,

@@ -32,7 +32,7 @@ exports.get_backend = (query) => {
 }
 
 exports.delete_backends = (query) => {
-  return Backend.remove(query);
+  return Backend.remove(query).exec();
 }
 
 /**

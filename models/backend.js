@@ -5,6 +5,9 @@ const backend = new Schema({
   name: {
     type: String
   },
+  ename: {
+    type: String
+  },
   path: {
     type: String
   },
@@ -13,4 +16,5 @@ const backend = new Schema({
   }
 });
 
+backend.index({ename: 1}, {unique: true});
 mongoose.model('Backend', backend);

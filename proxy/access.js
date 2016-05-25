@@ -19,13 +19,13 @@ exports.add_access = (access) => {
  * @return {[type]}       [description]
  */
 exports.get_access = (query) => {
-  return Access.find(query).exec();
+  return Access.find(query).populate('backend').exec();
 }
 
 exports.get_one = (query) => {
-  return Access.findOne(query).exec();
+  return Access.findOne(query).populate('backend').exec();
 }
 
 exports.delete_access = (query) => {
-  return Acces.remove(query);
+  return Access.remove(query).exec();
 }

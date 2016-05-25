@@ -13,6 +13,10 @@ const account = new Schema({
     type: String,
     default: md5('123456')
   },
+  is_admin: {
+    type: Boolean,
+    default: false
+  },
   sex: {
     type: String
   }
