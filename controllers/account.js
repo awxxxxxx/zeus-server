@@ -33,6 +33,14 @@ exports.login = function *(next) {
       msg: '用户名或密码错误'
     }
   }
+};
+
+exports.logout = function *(next) {
+  this.session = null;
+  this.body = {
+    status: 0,
+    msg: 'success'
+  }
 }
 
 /**
@@ -62,10 +70,14 @@ exports.add_account = function *(next) {
       msg: 'success'
     }
   } catch(e) {
-    this.status = 500;
+    let msg = 'error';
+    if (e.code === 11000) {
+      msg = '用户名不能重复';
+    }
     this.body = {
+      status: 3,
       error: e,
-      msg: 'error'
+      msg: msg
     }
   }
 };

@@ -22,4 +22,6 @@ const account = new Schema({
   }
 });
 
+account.index({name: 1}, {unique: true});
+
 mongoose.model('Account', account);

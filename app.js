@@ -8,7 +8,7 @@ const Account = require('./controllers/account.js');
 const Backend = require('./controllers/backend.js');
 const Access = require('./controllers/access.js');
 const auth = require('./middlewares/auth.js');
-
+const proxy = require('./middlewares/proxy.js');
 app.keys = ['niufgaigafdsiufsallgh'];
 app.use(session(app));
 
@@ -24,8 +24,9 @@ app.use(function *(next) {
 });
 
 router.post('/zeus/login', Account.login);
+router.get('/zeus/logout', Account.logout);
 
-
+router.all('/zeus/proxy/*', proxy.proxy);
 
 /**
  * 人员管理

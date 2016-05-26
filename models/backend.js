@@ -11,6 +11,9 @@ const backend = new Schema({
   path: {
     type: String
   },
+  host: {
+    type: String
+  },
   count: {
     type: Number
   }
